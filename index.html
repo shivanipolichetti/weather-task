@@ -1,0 +1,87 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1{
+            color:darkgrey;
+            font-style: oblique;
+            text-decoration: underline;
+            text-align: center;
+       
+        }
+        form{
+            text-align: center;
+        }
+       
+        
+    </style>
+</head>
+<body>
+   
+    <h1>Find weather of a City </h1>
+    <br><br>
+    <form action="">
+        <input type="text" placeholder="Enter a city">
+        <input type="Submit">
+    </form>
+    <br>
+
+    <script>
+        var a=document.getElementsByTagName("h1");
+        console.log(a);
+        var c=document.createElement("div");
+        document.body.appendChild(c);
+        var b=document.forms;
+        console.log(b[0]);
+        b[0].addEventListener("submit",function(e){
+            e.preventDefault();
+           
+            var d=e.target[0].value;
+            var g="https://api.openweathermap.org/data/2.5/weather?q="
+            var h="&appid=3915a847e4e95c668b1e8f5b8b8c6bb8";
+            var city=g+d+h;
+
+            fetch(city,{
+                method:"get"
+            }).then((val)=>{
+                return val.json()
+            }).then((val)=>{
+                var temp=parseInt((val.main.temp)-273.15);
+                console.log(temp);
+
+            if(temp<=20){
+                c.style.backgroundImage="url('./cold.gif')"
+                c.style.backgroundRepeat="no-repeat";
+                c.style.width="900px"
+                c.style.height="400px"
+                c.style.marginLeft="350px"
+        
+                
+            }
+           
+            else if(temp>25){
+                c.style.backgroundImage="url('./hot.gif')";
+                c.style.backgroundRepeat="no-repeat";
+                c.style.width="900px"
+                c.style.height="400px"
+                c.style.marginLeft="350px"
+                
+                
+            
+            }
+            c.innerHTML=temp+"<sup>o</sup>C";
+
+
+            })
+        
+        
+        })
+        
+       
+       
+        
+    </script>
+</body>
+</html>
